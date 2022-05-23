@@ -1,0 +1,786 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище TkanModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CategoryProduct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="40" />
+        </EntityType>
+        <EntityType Name="EdnIzmer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Manufacturer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="OrderBuy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="CountProduct" Type="int" />
+          <Property Name="OrderDate" Type="date" />
+          <Property Name="DeliveryDate" Type="date" />
+          <Property Name="PointOfIssueID" Type="int" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="ReceiptCode" Type="int" />
+          <Property Name="StatysID" Type="int" />
+        </EntityType>
+        <EntityType Name="PointOfIssue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityID" Type="int" />
+          <Property Name="Sreet" Type="int" />
+          <Property Name="NumberHouse" Type="int" />
+          <Property Name="Index" Type="int" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VendorCode" Type="varchar(max)" />
+          <Property Name="Title" Type="varchar(max)" />
+          <Property Name="EdnIzmerID" Type="int" />
+          <Property Name="Cost" Type="money" />
+          <Property Name="MaxDiscount" Type="int" />
+          <Property Name="ManufacturerID" Type="int" />
+          <Property Name="SuplierID" Type="int" />
+          <Property Name="CategoryProductID" Type="int" />
+          <Property Name="Discount" Type="int" />
+          <Property Name="CountCtock" Type="int" />
+          <Property Name="Information" Type="varchar(max)" />
+          <Property Name="ImageProduct" Type="binary" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Sreet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Statys">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Suplier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="30" />
+          <Property Name="Name" Type="varchar" MaxLength="15" />
+          <Property Name="Lastname" Type="varchar" MaxLength="20" />
+          <Property Name="Login" Type="varchar" MaxLength="20" />
+          <Property Name="Password" Type="varchar" MaxLength="30" />
+          <Property Name="RoleID" Type="int" />
+        </EntityType>
+        <Association Name="FK__OrderBuy__PointO__5812160E">
+          <End Role="PointOfIssue" Type="Self.PointOfIssue" Multiplicity="0..1" />
+          <End Role="OrderBuy" Type="Self.OrderBuy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PointOfIssue">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderBuy">
+              <PropertyRef Name="PointOfIssueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderBuy__Produc__571DF1D5">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="OrderBuy" Type="Self.OrderBuy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderBuy">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderBuy__Statys__59FA5E80">
+          <End Role="Statys" Type="Self.Statys" Multiplicity="0..1" />
+          <End Role="OrderBuy" Type="Self.OrderBuy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statys">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderBuy">
+              <PropertyRef Name="StatysID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderBuy__UserID__59063A47">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="OrderBuy" Type="Self.OrderBuy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderBuy">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PointOfIs__CityI__2D27B809">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="PointOfIssue" Type="Self.PointOfIssue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PointOfIssue">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PointOfIs__Sreet__2E1BDC42">
+          <End Role="Sreet" Type="Self.Sreet" Multiplicity="0..1" />
+          <End Role="PointOfIssue" Type="Self.PointOfIssue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sreet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PointOfIssue">
+              <PropertyRef Name="Sreet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__Categor__5441852A">
+          <End Role="CategoryProduct" Type="Self.CategoryProduct" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryProduct">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CategoryProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__EdnIzme__5165187F">
+          <End Role="EdnIzmer" Type="Self.EdnIzmer" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EdnIzmer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="EdnIzmerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__Manufac__52593CB8">
+          <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="ManufacturerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__Suplier__534D60F1">
+          <End Role="Suplier" Type="Self.Suplier" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suplier">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="SuplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__RoleID__267ABA7A">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище TkanModelContainer">
+          <EntitySet Name="CategoryProduct" EntityType="Self.CategoryProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EdnIzmer" EntityType="Self.EdnIzmer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderBuy" EntityType="Self.OrderBuy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PointOfIssue" EntityType="Self.PointOfIssue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sreet" EntityType="Self.Sreet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statys" EntityType="Self.Statys" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suplier" EntityType="Self.Suplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__OrderBuy__PointO__5812160E" Association="Self.FK__OrderBuy__PointO__5812160E">
+            <End Role="PointOfIssue" EntitySet="PointOfIssue" />
+            <End Role="OrderBuy" EntitySet="OrderBuy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderBuy__Produc__571DF1D5" Association="Self.FK__OrderBuy__Produc__571DF1D5">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="OrderBuy" EntitySet="OrderBuy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderBuy__Statys__59FA5E80" Association="Self.FK__OrderBuy__Statys__59FA5E80">
+            <End Role="Statys" EntitySet="Statys" />
+            <End Role="OrderBuy" EntitySet="OrderBuy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderBuy__UserID__59063A47" Association="Self.FK__OrderBuy__UserID__59063A47">
+            <End Role="User" EntitySet="User" />
+            <End Role="OrderBuy" EntitySet="OrderBuy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PointOfIs__CityI__2D27B809" Association="Self.FK__PointOfIs__CityI__2D27B809">
+            <End Role="City" EntitySet="City" />
+            <End Role="PointOfIssue" EntitySet="PointOfIssue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PointOfIs__Sreet__2E1BDC42" Association="Self.FK__PointOfIs__Sreet__2E1BDC42">
+            <End Role="Sreet" EntitySet="Sreet" />
+            <End Role="PointOfIssue" EntitySet="PointOfIssue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__Categor__5441852A" Association="Self.FK__Product__Categor__5441852A">
+            <End Role="CategoryProduct" EntitySet="CategoryProduct" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__EdnIzme__5165187F" Association="Self.FK__Product__EdnIzme__5165187F">
+            <End Role="EdnIzmer" EntitySet="EdnIzmer" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__Manufac__52593CB8" Association="Self.FK__Product__Manufac__52593CB8">
+            <End Role="Manufacturer" EntitySet="Manufacturer" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__Suplier__534D60F1" Association="Self.FK__Product__Suplier__534D60F1">
+            <End Role="Suplier" EntitySet="Suplier" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__RoleID__267ABA7A" Association="Self.FK__User__RoleID__267ABA7A">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TkanModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CategoryProduct">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Product__Categor__5441852A" FromRole="CategoryProduct" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PointOfIssue" Relationship="Self.FK__PointOfIs__CityI__2D27B809" FromRole="City" ToRole="PointOfIssue" />
+        </EntityType>
+        <EntityType Name="EdnIzmer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Product__EdnIzme__5165187F" FromRole="EdnIzmer" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Manufacturer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Product__Manufac__52593CB8" FromRole="Manufacturer" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="OrderBuy">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="CountProduct" Type="Int32" />
+          <Property Name="OrderDate" Type="DateTime" Precision="0" />
+          <Property Name="DeliveryDate" Type="DateTime" Precision="0" />
+          <Property Name="PointOfIssueID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="ReceiptCode" Type="Int32" />
+          <Property Name="StatysID" Type="Int32" />
+          <NavigationProperty Name="PointOfIssue" Relationship="Self.FK__OrderBuy__PointO__5812160E" FromRole="OrderBuy" ToRole="PointOfIssue" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__OrderBuy__Produc__571DF1D5" FromRole="OrderBuy" ToRole="Product" />
+          <NavigationProperty Name="Statys" Relationship="Self.FK__OrderBuy__Statys__59FA5E80" FromRole="OrderBuy" ToRole="Statys" />
+          <NavigationProperty Name="User" Relationship="Self.FK__OrderBuy__UserID__59063A47" FromRole="OrderBuy" ToRole="User" />
+        </EntityType>
+        <EntityType Name="PointOfIssue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityID" Type="Int32" />
+          <Property Name="Sreet" Type="Int32" />
+          <Property Name="NumberHouse" Type="Int32" />
+          <Property Name="Index" Type="Int32" />
+          <NavigationProperty Name="City" Relationship="Self.FK__PointOfIs__CityI__2D27B809" FromRole="PointOfIssue" ToRole="City" />
+          <NavigationProperty Name="OrderBuy" Relationship="Self.FK__OrderBuy__PointO__5812160E" FromRole="PointOfIssue" ToRole="OrderBuy" />
+          <NavigationProperty Name="Sreet1" Relationship="Self.FK__PointOfIs__Sreet__2E1BDC42" FromRole="PointOfIssue" ToRole="Sreet" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EdnIzmerID" Type="Int32" />
+          <Property Name="Cost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MaxDiscount" Type="Int32" />
+          <Property Name="ManufacturerID" Type="Int32" />
+          <Property Name="SuplierID" Type="Int32" />
+          <Property Name="CategoryProductID" Type="Int32" />
+          <Property Name="Discount" Type="Int32" />
+          <Property Name="CountCtock" Type="Int32" />
+          <Property Name="Information" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ImageProduct" Type="Binary" MaxLength="1" FixedLength="true" />
+          <NavigationProperty Name="CategoryProduct" Relationship="Self.FK__Product__Categor__5441852A" FromRole="Product" ToRole="CategoryProduct" />
+          <NavigationProperty Name="EdnIzmer" Relationship="Self.FK__Product__EdnIzme__5165187F" FromRole="Product" ToRole="EdnIzmer" />
+          <NavigationProperty Name="Manufacturer" Relationship="Self.FK__Product__Manufac__52593CB8" FromRole="Product" ToRole="Manufacturer" />
+          <NavigationProperty Name="OrderBuy" Relationship="Self.FK__OrderBuy__Produc__571DF1D5" FromRole="Product" ToRole="OrderBuy" />
+          <NavigationProperty Name="Suplier" Relationship="Self.FK__Product__Suplier__534D60F1" FromRole="Product" ToRole="Suplier" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK__User__RoleID__267ABA7A" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Sreet">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PointOfIssue" Relationship="Self.FK__PointOfIs__Sreet__2E1BDC42" FromRole="Sreet" ToRole="PointOfIssue" />
+        </EntityType>
+        <EntityType Name="Statys">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OrderBuy" Relationship="Self.FK__OrderBuy__Statys__59FA5E80" FromRole="Statys" ToRole="OrderBuy" />
+        </EntityType>
+        <EntityType Name="Suplier">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Product__Suplier__534D60F1" FromRole="Suplier" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Lastname" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="RoleID" Type="Int32" />
+          <NavigationProperty Name="OrderBuy" Relationship="Self.FK__OrderBuy__UserID__59063A47" FromRole="User" ToRole="OrderBuy" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__User__RoleID__267ABA7A" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK__Product__Categor__5441852A">
+          <End Role="CategoryProduct" Type="Self.CategoryProduct" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoryProduct">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CategoryProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PointOfIs__CityI__2D27B809">
+          <End Role="City" Type="Self.City" Multiplicity="0..1" />
+          <End Role="PointOfIssue" Type="Self.PointOfIssue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PointOfIssue">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__EdnIzme__5165187F">
+          <End Role="EdnIzmer" Type="Self.EdnIzmer" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EdnIzmer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="EdnIzmerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__Manufac__52593CB8">
+          <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="ManufacturerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderBuy__PointO__5812160E">
+          <End Role="PointOfIssue" Type="Self.PointOfIssue" Multiplicity="0..1" />
+          <End Role="OrderBuy" Type="Self.OrderBuy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PointOfIssue">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderBuy">
+              <PropertyRef Name="PointOfIssueID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderBuy__Produc__571DF1D5">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="OrderBuy" Type="Self.OrderBuy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderBuy">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderBuy__Statys__59FA5E80">
+          <End Role="Statys" Type="Self.Statys" Multiplicity="0..1" />
+          <End Role="OrderBuy" Type="Self.OrderBuy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statys">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderBuy">
+              <PropertyRef Name="StatysID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderBuy__UserID__59063A47">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="OrderBuy" Type="Self.OrderBuy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderBuy">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PointOfIs__Sreet__2E1BDC42">
+          <End Role="Sreet" Type="Self.Sreet" Multiplicity="0..1" />
+          <End Role="PointOfIssue" Type="Self.PointOfIssue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sreet">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PointOfIssue">
+              <PropertyRef Name="Sreet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__Suplier__534D60F1">
+          <End Role="Suplier" Type="Self.Suplier" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suplier">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="SuplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__RoleID__267ABA7A">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TkanEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CategoryProduct" EntityType="Self.CategoryProduct" />
+          <EntitySet Name="City" EntityType="Self.City" />
+          <EntitySet Name="EdnIzmer" EntityType="Self.EdnIzmer" />
+          <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" />
+          <EntitySet Name="OrderBuy" EntityType="Self.OrderBuy" />
+          <EntitySet Name="PointOfIssue" EntityType="Self.PointOfIssue" />
+          <EntitySet Name="Product" EntityType="Self.Product" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Sreet" EntityType="Self.Sreet" />
+          <EntitySet Name="Statys" EntityType="Self.Statys" />
+          <EntitySet Name="Suplier" EntityType="Self.Suplier" />
+          <EntitySet Name="User" EntityType="Self.User" />
+          <AssociationSet Name="FK__Product__Categor__5441852A" Association="Self.FK__Product__Categor__5441852A">
+            <End Role="CategoryProduct" EntitySet="CategoryProduct" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PointOfIs__CityI__2D27B809" Association="Self.FK__PointOfIs__CityI__2D27B809">
+            <End Role="City" EntitySet="City" />
+            <End Role="PointOfIssue" EntitySet="PointOfIssue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__EdnIzme__5165187F" Association="Self.FK__Product__EdnIzme__5165187F">
+            <End Role="EdnIzmer" EntitySet="EdnIzmer" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__Manufac__52593CB8" Association="Self.FK__Product__Manufac__52593CB8">
+            <End Role="Manufacturer" EntitySet="Manufacturer" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderBuy__PointO__5812160E" Association="Self.FK__OrderBuy__PointO__5812160E">
+            <End Role="PointOfIssue" EntitySet="PointOfIssue" />
+            <End Role="OrderBuy" EntitySet="OrderBuy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderBuy__Produc__571DF1D5" Association="Self.FK__OrderBuy__Produc__571DF1D5">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="OrderBuy" EntitySet="OrderBuy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderBuy__Statys__59FA5E80" Association="Self.FK__OrderBuy__Statys__59FA5E80">
+            <End Role="Statys" EntitySet="Statys" />
+            <End Role="OrderBuy" EntitySet="OrderBuy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderBuy__UserID__59063A47" Association="Self.FK__OrderBuy__UserID__59063A47">
+            <End Role="User" EntitySet="User" />
+            <End Role="OrderBuy" EntitySet="OrderBuy" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PointOfIs__Sreet__2E1BDC42" Association="Self.FK__PointOfIs__Sreet__2E1BDC42">
+            <End Role="Sreet" EntitySet="Sreet" />
+            <End Role="PointOfIssue" EntitySet="PointOfIssue" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__Suplier__534D60F1" Association="Self.FK__Product__Suplier__534D60F1">
+            <End Role="Suplier" EntitySet="Suplier" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__RoleID__267ABA7A" Association="Self.FK__User__RoleID__267ABA7A">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище TkanModelContainer" CdmEntityContainer="TkanEntities">
+          <EntitySetMapping Name="CategoryProduct">
+            <EntityTypeMapping TypeName="TkanModel.CategoryProduct">
+              <MappingFragment StoreEntitySet="CategoryProduct">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="City">
+            <EntityTypeMapping TypeName="TkanModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EdnIzmer">
+            <EntityTypeMapping TypeName="TkanModel.EdnIzmer">
+              <MappingFragment StoreEntitySet="EdnIzmer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manufacturer">
+            <EntityTypeMapping TypeName="TkanModel.Manufacturer">
+              <MappingFragment StoreEntitySet="Manufacturer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderBuy">
+            <EntityTypeMapping TypeName="TkanModel.OrderBuy">
+              <MappingFragment StoreEntitySet="OrderBuy">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="CountProduct" ColumnName="CountProduct" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="PointOfIssueID" ColumnName="PointOfIssueID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ReceiptCode" ColumnName="ReceiptCode" />
+                <ScalarProperty Name="StatysID" ColumnName="StatysID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PointOfIssue">
+            <EntityTypeMapping TypeName="TkanModel.PointOfIssue">
+              <MappingFragment StoreEntitySet="PointOfIssue">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="Sreet" ColumnName="Sreet" />
+                <ScalarProperty Name="NumberHouse" ColumnName="NumberHouse" />
+                <ScalarProperty Name="Index" ColumnName="Index" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product">
+            <EntityTypeMapping TypeName="TkanModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="VendorCode" ColumnName="VendorCode" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="EdnIzmerID" ColumnName="EdnIzmerID" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="MaxDiscount" ColumnName="MaxDiscount" />
+                <ScalarProperty Name="ManufacturerID" ColumnName="ManufacturerID" />
+                <ScalarProperty Name="SuplierID" ColumnName="SuplierID" />
+                <ScalarProperty Name="CategoryProductID" ColumnName="CategoryProductID" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="CountCtock" ColumnName="CountCtock" />
+                <ScalarProperty Name="Information" ColumnName="Information" />
+                <ScalarProperty Name="ImageProduct" ColumnName="ImageProduct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Role">
+            <EntityTypeMapping TypeName="TkanModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sreet">
+            <EntityTypeMapping TypeName="TkanModel.Sreet">
+              <MappingFragment StoreEntitySet="Sreet">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statys">
+            <EntityTypeMapping TypeName="TkanModel.Statys">
+              <MappingFragment StoreEntitySet="Statys">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suplier">
+            <EntityTypeMapping TypeName="TkanModel.Suplier">
+              <MappingFragment StoreEntitySet="Suplier">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="TkanModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Lastname" ColumnName="Lastname" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
