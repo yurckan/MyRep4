@@ -1,0 +1,78 @@
+﻿<Window x:Class="WPF.AddProduct"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF"
+        mc:Ignorable="d"
+        Title="Добавить продукт" Height="600" Width="600" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Column="0" Grid.Row="0"  Text="Артикул: " />
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="Наименование: " />
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="Еденица измерения: " />
+            <TextBlock Grid.Column="0" Grid.Row="3" Text="Стоимость: " />
+            <TextBlock Grid.Column="0" Grid.Row="4" Text="Максимальная скидка: " />
+            <TextBlock Grid.Column="0" Grid.Row="5" Text="Производитель: " />
+            <TextBlock Grid.Column="0" Grid.Row="6" Text="Постовщик: " />
+            <TextBlock Grid.Column="0" Grid.Row="7" Text="Категория товара: " />
+            <TextBlock Grid.Column="0" Grid.Row="8" Text="Действующая скидка: " />
+            <TextBlock Grid.Column="0" Grid.Row="9" Text="Количество на складе: " />
+            <TextBlock Grid.Column="0" Grid.Row="10" Text="Описание: " />
+
+            <TextBox x:Name="ArticuleTB" Grid.Column="1" Grid.Row="0" />
+            <TextBox x:Name="TitleTB" Grid.Column="1" Grid.Row="1" />
+            <Border Grid.Column="1" Grid.Row="2" Margin="5" CornerRadius="5" BorderBrush="#FF498C51" BorderThickness="1">
+                <ComboBox x:Name="EdIzmerCmb"/>
+            </Border>
+            <TextBox x:Name="CostTB" Grid.Column="1" Grid.Row="3" />
+            <TextBox  Grid.Column="1" Grid.Row="4"  MaxLength="3"/>
+            <Border Grid.Column="1" Grid.Row="5" Margin="5" CornerRadius="5" BorderBrush="#FF498C51" BorderThickness="1">
+                <ComboBox x:Name="ManufacturerCmb"/>
+            </Border>
+            <Border Grid.Column="1" Grid.Row="6" Margin="5" CornerRadius="5" BorderBrush="#FF498C51" BorderThickness="1">
+                <ComboBox x:Name="Spleint"/>
+            </Border>
+            <Border Grid.Column="1" Grid.Row="7" Margin="5" CornerRadius="5" BorderBrush="#FF498C51" BorderThickness="1">
+                <ComboBox x:Name="CategoryCmb"/>
+            </Border>
+            <TextBox Grid.Column="1" Grid.Row="8" MaxLength="3"/>
+            <TextBox x:Name="CountTB" Grid.Column="1" Grid.Row="9" MaxLength="6"/>
+            <TextBox x:Name="InformationTB" Grid.Column="1" Grid.Row="10" MaxLength="1000"/>
+        </Grid>
+
+        <Grid Grid.Row="2" MinHeight="30">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" x:Name="SaveBtn" Content="Добавить" Click="SaveBtn_Click"/>
+            <Button Grid.Column="2" x:Name="ExitBtn" Content="Отмена" Click="ExitBtn_Click"/>
+        </Grid>
+    </Grid>
+</Window>
